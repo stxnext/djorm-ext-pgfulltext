@@ -4,13 +4,13 @@ import django
 from django.db import models
 from psycopg2.extensions import adapt
 
+
 class VectorField(models.Field):
     def __init__(self, *args, **kwargs):
         kwargs['null'] = True
         kwargs['default'] = ''
         kwargs['editable'] = False
         kwargs['serialize'] = False
-        kwargs['db_index'] = True
         super(VectorField, self).__init__(*args, **kwargs)
 
     def db_type(self, *args, **kwargs):
