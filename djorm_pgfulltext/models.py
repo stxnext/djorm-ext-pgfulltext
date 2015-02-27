@@ -242,9 +242,9 @@ class SearchManagerMixIn(object):
         if '__' not in field_name:
             field = self.model._meta.get_field(field_name)
             return '%s.%s' % (qn(self.model._meta.db_table), qn(field.column))
-        else:
-            from_field, to_field = field_name.split('__')
-            field = self.model._meta.get_field(from_field)
+
+        from_field, to_field = field_name.split('__')
+        field = self.model._meta.get_field(from_field)
 
         model_pk = '%s.%s' % (qn(self.model._meta.db_table),
                               qn(self.model._meta.pk.column))
@@ -259,6 +259,7 @@ class SearchManagerMixIn(object):
             r' GROUP(.*?)\)',
             ')',
             '(%s)' % q.query.sql_with_params()[0] % model_pk)
+
         return sql
 
 
