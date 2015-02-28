@@ -357,6 +357,12 @@ class SearchQuerySet(QuerySet):
         
         return qs
 
+    def word_tree_search(self, query, **kwargs):
+        kwargs['raw'] = True
+        query = re.sub('[^a-zA-Z0-9 ]+', '', query)
+        query = '%s:*' % query.strip().replace(' ', ' & ')
+        return self.search(query, **kwargs)
+
 
 class SearchManager(SearchManagerMixIn, models.Manager):
     pass
