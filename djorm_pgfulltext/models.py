@@ -136,6 +136,9 @@ class SearchManagerMixIn(object):
     def search(self, *args, **kwargs):
         return self.get_queryset().search(*args, **kwargs)
 
+    def word_tree_search(self, *args, **kwargs):
+        return self.get_queryset().word_tree_search(*args, **kwargs)
+
     def update_search_field(self, pk=None, config=None, using=None):
         '''
         Update the search_field of one instance, or a list of instances, or
