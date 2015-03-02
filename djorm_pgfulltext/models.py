@@ -361,9 +361,11 @@ class SearchQuerySet(QuerySet):
         return qs
 
     def word_tree_search(self, query, **kwargs):
-        kwargs['raw'] = True
-        query = re.sub('[^a-zA-Z0-9 ]+', '', query)
-        query = '%s:*' % query.strip().replace(' ', ' & ')
+        if query:
+            kwargs['raw'] = True
+            query = re.sub('[^a-zA-Z0-9 ]+', '', query)
+            query = re.sub('[ ]+', ' & ', query.strip())
+            query = '%s:*' % query
         return self.search(query, **kwargs)
 
 
