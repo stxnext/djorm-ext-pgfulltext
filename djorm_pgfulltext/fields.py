@@ -12,6 +12,7 @@ from django.db import models
 from djorm_pgfulltext.utils import adapt
 
 
+
 class VectorField(models.Field):
 
     def __init__(self, *args, **kwargs):
